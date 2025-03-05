@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>納粹主題網站</title>
+    <link rel="icon" href="download.png" type="image/png"> <!-- 書籤圖標 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9; /* 預設背景色 */
+            color: #333; /* 預設文字顏色 */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        img {
+            width: 100%; /* 設置圖片寬度為 100% */
+            height: auto; /* 高度自適應 */
+            display: block; /* 使圖片顯示為塊級元素 */
+        }
+        .tabs {
+            display: flex;
+            background-color: #f44336; /* 紅色背景 */
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+        .tab {
+            padding: 14px 20px;
+            cursor: pointer;
+            text-align: center;
+            flex: 1;
+            color: white; /* 白色文字 */
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .tab:hover {
+            background-color: #d32f2f; /* 深紅色懸停效果 */
+            transform: scale(1.05);
+        }
+        .active {
+            background-color: #c62828; /* 活動分頁的顏色 */
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 0 0 8px 8px;
+            background-color: white; /* 預設白色背景 */
+            display: none; /* 預設不顯示 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #333; /* 預設文字顏色 */
+        }
+        .content.active {
+            display: block; /* 顯示當前活動的內容 */
+        }
+        .dark-mode {
+            background-color: #121212; /* 深色背景 */
+            color: #f1f1f1; /* 深色文字 */
+        }
+        .dark-mode .tabs {
+            background-color: #f44336; /* 深色模式下的紅色分頁背景 */
+        }
+        .dark-mode .tab {
+            color: white; /* 深色模式下的分頁文字 */
+        }
+        .dark-mode .tab:hover {
+            background-color: #d32f2f; /* 深色模式下的懸停效果 */
+        }
+        .dark-mode .active {
+            background-color: #c62828; /* 深色模式下的活動分頁顏色 */
+        }
+        .dark-mode .content {
+            background-color: #f44336; /* 深色模式下的紅色內容背景 */
+            color: white; /* 深色模式下的內容文字顏色 */
+        }
+        .toggle-button {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: black; /* 黑色按鈕 */
+            color: white; /* 按鈕文字顏色 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block; /* 使按鈕顯示為區塊級元素 */
+            text-align: center; /* 按鈕文字置中 */
+        }
+        .dark-mode .toggle-button {
+            background-color: white; /* 深色模式下的白色按鈕 */
+            color: black; /* 深色模式下的按鈕文字顏色 */
+        }
+        .toggle-button:hover {
+            background-color: #444; /* 按鈕懸停效果 */
+        }
+        .dark-mode .toggle-button:hover {
+            background-color: #ddd; /* 深色模式下按鈕懸停效果 */
+        }
+    </style>
+</head>
+<body>
+<img src="download.png" />
+<div class="tabs">
+    <div class="tab active" onclick="changeTab(0, 'home')">主頁</div>
+    <div class="tab" onclick="changeTab(1, 'history')">歷史背景</div>
+    <div class="tab" onclick="changeTab(2, 'thought')">主觀意識</div>
+    <div class="tab" onclick="changeTab(3, 'worldwar2')">WW2</div>
+    <div class="tab" onclick="changeTab(4, 'person')">重要人物</div>
+    <div class="tab" onclick="changeTab(5, 'references')">參考資料</div>
+</div>
+
+<div class="content active" id="content0">這是主頁的內容。</div>
+<div class="content" id="content1">這是歷史背景的內容。</div>
+<div class="content" id="content2">這是主觀意識的內容。</div>
+<div class="content" id="content3">這是WW2的內容。</div>
+<div class="content" id="content4">這是重要人物的內容。</div>
+<div class="content" id="content5">這是參考資料的內容。</div>
+
+<button class="toggle-button" id="modeToggle" onclick="toggleDarkMode()">切換深色模式</button>
+
+<script>
+    function changeTab(index, path) {
+        const contents = document.querySelectorAll('.content');
+        const tabs = document.querySelectorAll('.tab');
+
+        // 隱藏所有內容
+        contents.forEach(content => content.classList.remove('active'));
+
+        // 移除所有標籤的活動狀態
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // 顯示當前選擇的內容和標籤
+        contents[index].classList.add('active');
+        tabs[index].classList.add('active');
+
+        // 更新 URL，替換原有的 URL
+        const newUrl = `${window.location.origin}${window.location.pathname.split('/').slice(0, -1).join('/')}/${path}`;
+        history.replaceState(null, '', newUrl);
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const button = document.getElementById('modeToggle');
+        button.textContent = document.body.classList.contains('dark-mode') ? '切換淺色模式' : '切換深色模式';
+    }
+</script>
+
+</body>
+</html>
