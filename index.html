@@ -13,11 +13,19 @@
             background-color: #f9f9f9; /* 預設背景色 */
             color: #333; /* 預設文字顏色 */
             transition: background-color 0.3s, color 0.3s;
+            text-align: center; /* 置中內容 */
         }
         img {
             width: 100%; /* 設置圖片寬度為 100% */
             height: auto; /* 高度自適應 */
             display: block; /* 使圖片顯示為塊級元素 */
+        }
+        h1 {
+            color: white;
+            background-color: red;
+            font-size: 5em; /* 增加字體大小 */
+            margin: 0; /* 移除外邊距 */
+            padding: 10px; /* 添加內邊距 */
         }
         .tabs {
             display: flex;
@@ -98,7 +106,8 @@
     </style>
 </head>
 <body>
-<img src="download.png" />
+<h1>培邪中學頭條新聞</h1>
+<img src="fatchan2.png" />
 <div class="tabs">
     <div class="tab active" onclick="changeTab(0, 'home')">主頁</div>
     <div class="tab" onclick="changeTab(1, 'history')">歷史背景</div>
